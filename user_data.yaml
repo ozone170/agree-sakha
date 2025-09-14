@@ -1,0 +1,74 @@
+Ozone170:
+  analyses:
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-09-15T01:29:10.882660'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-09-15T01:29:21.240995'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-09-15T01:29:27.893767'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-09-15T01:29:41.198841'
+  created_at: '2025-09-15T01:28:35.168734'
+  email: adityashindhe8@gmail.com
+  name: ADITYA
+  password: 9796377e5805a0b7207c7244c303ac33298af3392848af6c600598fac14e91aa
