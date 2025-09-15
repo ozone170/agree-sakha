@@ -1,10 +1,16 @@
-# Project Analysis TODO
+# TODO: Implement PDF Report Generation Combining JSON and CSV Data
 
-- [x] Analyze overall architecture and components
-- [x] Review code structure, dependencies, and best practices
-- [x] Examine ML model integration and data handling
-- [x] Check security aspects (auth, data storage)
-- [x] Assess UI/UX and features
-- [x] Identify potential improvements or issues
-- [x] Run the app locally to test functionality
-- [x] Check for any missing dependencies or setup issues
+## Tasks
+
+- [x] Import reportlab modules in streamlit_app.py
+- [x] Create generate_pdf_report function that:
+  - Takes analysis_data and plan as input
+  - Creates a PDF with title, predicted crop, date, soil parameters table, and implementation plan
+- [x] Add PDF download button in the export section of show_soil_analysis function
+- [ ] Test PDF generation by running the app and downloading a sample report
+
+## Notes
+
+- Reportlab is already in requirements.txt
+- PDF will combine analysis data (JSON-like) and present parameters in a table format (CSV-like)
+- Implementation plan will be included in the PDF
