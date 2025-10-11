@@ -1,0 +1,14 @@
+{
+  "home_content": {
+    "about": "AgriSakha is an intelligent platform that combines cutting-edge AI technology with agricultural expertise to provide farmers with precise soil analysis and personalized crop recommendations. Our mission is to bridge the gap between traditional farming practices and modern data-driven agriculture.",
+    "vision": "To empower every farmer with data, technology, and insights for sustainable and profitable agriculture. Our vision is to create a future where technology meets the soil, enabling farmers worldwide to make informed decisions that maximize yield while preserving natural resources.",
+    "mission": "To provide accessible, accurate, and actionable agricultural intelligence to farmers globally. Through our AI-driven platform, we are committed to delivering real-time soil analysis, personalized crop recommendations, and comprehensive farming guidelines.",
+    "contact": {
+      "email": "contact@agrisakha.com",
+      "phone": "+91 98765 43210",
+      "address": "2nd Floor, Innovation Hub, Bhubaneswar, Odisha, India"
+    }
+  },
+  "last_updated": "2025-10-11T02:24:58.491112",
+  "updated_by": "system"
+}

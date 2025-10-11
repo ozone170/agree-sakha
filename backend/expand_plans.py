@@ -1,11 +1,11 @@
 # backend/expand_plans.py
 import json, os
 
-BASE = os.path.join(os.path.dirname(__file__), "implementation_plans.json")
-OUT = os.path.join(os.path.dirname(__file__), "implementation_plans_expanded.json")
+EXPANDED = os.path.join(os.path.dirname(__file__), "implementation_plans_expanded.json")
+OUT = EXPANDED
 
-with open(BASE, "r", encoding="utf-8") as f:
-    base = json.load(f)
+# Base plans removed, using expanded directly if needed
+base = {}
 
 def make_variant(base_plan, variant):
     p = {}

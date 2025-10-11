@@ -1,0 +1,19 @@
+[
+  {
+    "id": "b86846da-b087-4212-ac35-d444ce635696",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "subject": "Test Subject",
+    "message": "Test message",
+    "created_at": "2025-10-11T02:28:17.163768",
+    "status": "unread"
+  },
+  {
+    "id": "a38f1d88-1397-4b20-862d-83a608a24eb3",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "message": "Test message",
+    "created_at": "2025-10-11T02:39:20.463296",
+    "status": "unread"
+  }
+]
