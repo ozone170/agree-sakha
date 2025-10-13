@@ -861,13 +861,15 @@ def main():
         
         st.sidebar.markdown("---")
         
-        # Navigation
-        page = st.sidebar.radio("Navigate", ["🏠 Dashboard", "🔬 Soil Analysis", "🌾 Crop Database", "📊 Reports", "ℹ️ About"])
-
-        # Handle navigation from dashboard buttons
+        # Handle navigation from dashboard buttons first
         if st.session_state.get('navigate_to'):
-            page = st.session_state.navigate_to
+            default_page = st.session_state.navigate_to
             del st.session_state.navigate_to
+        else:
+            default_page = "🏠 Dashboard"
+
+        # Navigation
+        page = st.sidebar.radio("Navigate", ["🏠 Dashboard", "🔬 Soil Analysis", "🌾 Crop Database", "📊 Reports", "ℹ️ About"], index=["🏠 Dashboard", "🔬 Soil Analysis", "🌾 Crop Database", "📊 Reports", "ℹ️ About"].index(default_page))
 
         if page == "🏠 Dashboard":
             show_user_dashboard()

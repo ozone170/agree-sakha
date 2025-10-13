@@ -171,6 +171,12 @@ def main():
     if model is None:
         return
 
+    # Initialize session state for analysis data
+    if 'analysis_data' not in st.session_state:
+        st.session_state.analysis_data = None
+    if 'selected_variant' not in st.session_state:
+        st.session_state.selected_variant = None
+
     # Input form
     st.markdown("### 📋 Soil Parameters")
 
@@ -204,8 +210,8 @@ def main():
         crop_info = plans.get(predicted_crop, {})
         variants = list(crop_info.get('variants', {}).keys())
 
-        # Store initial analysis data
-        analysis_data = {
+        # Store analysis data in session state
+        st.session_state.analysis_data = {
             'nitrogen': nitrogen,
             'phosphorus': phosphorus,
             'potassium': potassium,
@@ -218,8 +224,14 @@ def main():
             'predicted_crop': predicted_crop,
             'variants': variants
         }
+        # Reset selected variant when new analysis is done
+        st.session_state.selected_variant = None
+        st.rerun()
 
-        # Display results
+    # Display results if analysis data exists
+    if st.session_state.analysis_data:
+        analysis_data = st.session_state.analysis_data
+
         st.markdown("### 🎯 Analysis Results")
 
         col1, col2 = st.columns([1, 2])
@@ -227,17 +239,18 @@ def main():
         with col1:
             st.markdown('<div class="prediction-card">', unsafe_allow_html=True)
             st.markdown(f"### 🌾 **Predicted Crop**")
-            st.markdown(f"# {predicted_crop}")
+            st.markdown(f"# {analysis_data['predicted_crop']}")
             st.markdown(f"**Confidence:** 99.32%")
             st.markdown("</div>", unsafe_allow_html=True)
 
             # Display crop image if available
-            if predicted_crop.lower() in crop_images:
-                st.image(crop_images[predicted_crop.lower()], caption=f"Image of {predicted_crop}", use_container_width=True)
+            if analysis_data['predicted_crop'].lower() in crop_images:
+                st.image(crop_images[analysis_data['predicted_crop'].lower()], caption=f"Image of {analysis_data['predicted_crop']}", use_container_width=True)
 
             # Soil parameters visualization
             params = ['Nitrogen', 'Phosphorus', 'Potassium', 'pH', 'Temperature', 'Humidity', 'Rainfall']
-            values = [nitrogen, phosphorus, potassium, ph, temperature, humidity, rainfall]
+            values = [analysis_data['nitrogen'], analysis_data['phosphorus'], analysis_data['potassium'],
+                     analysis_data['ph'], analysis_data['temperature'], analysis_data['humidity'], analysis_data['rainfall']]
 
             fig = px.bar(x=params, y=values, title="Soil Parameters", color=values,
                         color_continuous_scale="Viridis")
@@ -247,11 +260,28 @@ def main():
         with col2:
             # Implementation plans
             plan = None
-            selected_variant = None
+            variants = analysis_data.get('variants', [])
+            crop_info = plans.get(analysis_data['predicted_crop'], {})
+
             if variants:
                 st.markdown("### 📋 Implementation Plans")
 
-                selected_variant = st.selectbox("Choose Plan Variant", variants)
+                # Use session state to persist selected variant
+                if st.session_state.selected_variant and st.session_state.selected_variant in variants:
+                    default_index = variants.index(st.session_state.selected_variant)
+                else:
+                    default_index = 0
+
+                selected_variant = st.selectbox(
+                    "Choose Plan Variant",
+                    variants,
+                    index=default_index,
+                    key="plan_variant_selectbox"
+                )
+
+                # Update session state when selection changes
+                if selected_variant != st.session_state.selected_variant:
+                    st.session_state.selected_variant = selected_variant
 
                 if selected_variant in crop_info.get('variants', {}):
                     plan = crop_info['variants'][selected_variant]
@@ -273,8 +303,8 @@ def main():
 
                     st.markdown("</div>", unsafe_allow_html=True)
 
-                    # Save analysis with selected plan
-                    if st.button("💾 Save Analysis with Selected Plan", use_container_width=True):
+                    # Auto-save analysis with selected plan
+                    if st.session_state.selected_variant:
                         analysis_data['selected_variant'] = selected_variant
                         analysis_data['selected_plan'] = plan
 
@@ -283,7 +313,7 @@ def main():
                             try:
                                 from backend.auth import save_analysis
                                 save_analysis(st.session_state.username, analysis_data)
-                                st.success("✅ Analysis saved successfully with selected implementation plan!")
+                                st.success("✅ Analysis saved automatically with selected implementation plan!")
                             except ImportError:
                                 st.warning("Analysis not saved - running in standalone mode")
                         else:
@@ -326,6 +356,12 @@ def main():
                 file_name=f"soil_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf",
                 mime="application/pdf"
             )
+
+        # Clear analysis button
+        if st.button("🗑️ Clear Analysis", use_container_width=True):
+            st.session_state.analysis_data = None
+            st.session_state.selected_variant = None
+            st.rerun()
 
 if __name__ == "__main__":
     main()
