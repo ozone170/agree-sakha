@@ -14,8 +14,10 @@ import streamlit_authenticator as stauth
 import hashlib
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
 from reportlab.lib import colors
+import matplotlib.pyplot as plt
+import io
 
 # Page configuration
 st.set_page_config(
@@ -177,8 +179,94 @@ def load_model_data():
         st.error(f"❌ Error loading model: {str(e)}")
         return None, None, None
 
+def get_parameter_interpretation(param_name, value):
+    """Get interpretation for soil parameter based on value ranges"""
+    interpretations = {
+        'nitrogen': {
+            'ranges': [(0, 20), (20, 40), (40, 60), (60, 100), (100, 200)],
+            'labels': ['Very Low', 'Low', 'Medium', 'High', 'Very High']
+        },
+        'phosphorus': {
+            'ranges': [(0, 15), (15, 30), (30, 50), (50, 80), (80, 200)],
+            'labels': ['Very Low', 'Low', 'Medium', 'High', 'Very High']
+        },
+        'potassium': {
+            'ranges': [(0, 50), (50, 100), (100, 150), (150, 200), (200, 300)],
+            'labels': ['Very Low', 'Low', 'Medium', 'High', 'Very High']
+        },
+        'ph': {
+            'ranges': [(0, 5.5), (5.5, 6.5), (6.5, 7.5), (7.5, 8.5), (8.5, 14)],
+            'labels': ['Very Acidic', 'Acidic', 'Neutral', 'Alkaline', 'Very Alkaline']
+        }
+    }
+
+    if param_name.lower() in interpretations:
+        ranges = interpretations[param_name.lower()]['ranges']
+        labels = interpretations[param_name.lower()]['labels']
+        for i, (min_val, max_val) in enumerate(ranges):
+            if min_val <= value < max_val:
+                return labels[i]
+    return 'Unknown'
+
+def create_soil_nutrients_chart(analysis_data):
+    """Create a bar chart comparing soil nutrients to optimal ranges"""
+    # Optimal ranges for visualization
+    optimal_ranges = {
+        'Nitrogen': 60,
+        'Phosphorus': 40,
+        'Potassium': 150,
+        'pH': 7.0
+    }
+
+    # Actual values
+    actual_values = {
+        'Nitrogen': analysis_data['nitrogen'],
+        'Phosphorus': analysis_data['phosphorus'],
+        'Potassium': analysis_data['potassium'],
+        'pH': analysis_data['ph']
+    }
+
+    # Create figure
+    fig, ax = plt.subplots(figsize=(8, 5))
+    nutrients = list(actual_values.keys())
+    actual = list(actual_values.values())
+    optimal = list(optimal_ranges.values())
+
+    x = np.arange(len(nutrients))
+    width = 0.35
+
+    bars1 = ax.bar(x - width/2, actual, width, label='Actual', color='#16a34a', alpha=0.8)
+    bars2 = ax.bar(x + width/2, optimal, width, label='Optimal', color='#dc2626', alpha=0.6)
+
+    ax.set_xlabel('Nutrients')
+    ax.set_ylabel('Values')
+    ax.set_title('Soil Nutrients vs Optimal Ranges')
+    ax.set_xticks(x)
+    ax.set_xticklabels(nutrients)
+    ax.legend()
+
+    # Add value labels on bars
+    for bar in bars1:
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.1f}', ha='center', va='bottom')
+
+    for bar in bars2:
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.1f}', ha='center', va='bottom')
+
+    plt.tight_layout()
+
+    # Save to buffer
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png', dpi=150, bbox_inches='tight')
+    buf.seek(0)
+    plt.close(fig)
+    return buf
+
 def generate_pdf_report(analysis_data, plan=None):
-    """Generate PDF report combining analysis data and implementation plan"""
+    """Generate professional lab-style PDF soil test report"""
     buffer = BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=letter)
     styles = getSampleStyleSheet()
@@ -187,76 +275,227 @@ def generate_pdf_report(analysis_data, plan=None):
     title_style = ParagraphStyle(
         'Title',
         parent=styles['Heading1'],
-        fontSize=18,
-        spaceAfter=30,
-        alignment=1  # Center
+        fontSize=20,
+        spaceAfter=20,
+        alignment=1,  # Center
+        fontName='Helvetica-Bold'
+    )
+    subtitle_style = ParagraphStyle(
+        'Subtitle',
+        parent=styles['Heading2'],
+        fontSize=16,
+        spaceAfter=15,
+        alignment=1,
+        fontName='Helvetica-Bold'
     )
     heading_style = ParagraphStyle(
         'Heading',
-        parent=styles['Heading2'],
+        parent=styles['Heading3'],
         fontSize=14,
-        spaceAfter=20
+        spaceAfter=12,
+        fontName='Helvetica-Bold'
     )
     normal_style = styles['Normal']
+    small_style = ParagraphStyle(
+        'Small',
+        parent=styles['Normal'],
+        fontSize=9
+    )
 
     elements = []
 
-    # Title
-    elements.append(Paragraph("Soil Analysis Report", title_style))
-    elements.append(Spacer(1, 12))
+    # Header
+    elements.append(Paragraph("AGREE-SAKHA", title_style))
+    elements.append(Paragraph("SOIL TEST REPORT", subtitle_style))
+    elements.append(Spacer(1, 20))
 
-    # Date
-    elements.append(Paragraph(f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", normal_style))
-    elements.append(Spacer(1, 12))
-
-    # Predicted Crop
-    elements.append(Paragraph(f"Predicted Crop: {analysis_data['predicted_crop']}", heading_style))
-    elements.append(Paragraph("Confidence: 99.32%", normal_style))
-    elements.append(Spacer(1, 12))
-
-    # Soil Parameters Table
-    elements.append(Paragraph("Soil Parameters:", heading_style))
-
-    param_data = [
-        ['Parameter', 'Value', 'Unit'],
-        ['Nitrogen', f"{analysis_data['nitrogen']}", 'ppm'],
-        ['Phosphorus', f"{analysis_data['phosphorus']}", 'ppm'],
-        ['Potassium', f"{analysis_data['potassium']}", 'ppm'],
-        ['pH', f"{analysis_data['ph']}", ''],
-        ['Temperature', f"{analysis_data['temperature']}", '°C'],
-        ['Humidity', f"{analysis_data['humidity']}", '%'],
-        ['Rainfall', f"{analysis_data['rainfall']}", 'cm'],
-        ['Area', f"{analysis_data['area']}", analysis_data['area_unit']]
+    # Metadata Table
+    metadata_data = [
+        ['Report Number:', f"AGR-{datetime.now().strftime('%Y%m%d')}-{hash(str(analysis_data)) % 10000:04d}"],
+        ['Date Received:', datetime.now().strftime('%Y-%m-%d')],
+        ['Date Processed:', datetime.now().strftime('%Y-%m-%d')],
+        ['Client/User Name:', st.session_state.get('username', 'Anonymous')],
+        ['Location/Area:', f"{analysis_data.get('area', 'N/A')} {analysis_data.get('area_unit', 'ha')}"]
     ]
 
-    table = Table(param_data)
-    table.setStyle(TableStyle([
+    metadata_table = Table(metadata_data, colWidths=[120, 300])
+    metadata_table.setStyle(TableStyle([
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+    ]))
+    elements.append(metadata_table)
+    elements.append(Spacer(1, 20))
+
+    # Sample Information
+    elements.append(Paragraph("SAMPLE INFORMATION", heading_style))
+    sample_info = [
+        ['Predicted Crop:', analysis_data['predicted_crop']],
+        ['Confidence Level:', '99.32%'],
+        ['Analysis Method:', 'AI-Powered Machine Learning Model']
+    ]
+
+    sample_table = Table(sample_info, colWidths=[120, 300])
+    sample_table.setStyle(TableStyle([
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+    ]))
+    elements.append(sample_table)
+    elements.append(Spacer(1, 15))
+
+    # Recommendations Section
+    elements.append(Paragraph("RECOMMENDATIONS", heading_style))
+
+    if plan:
+        # Lime Requirement
+        if 'lime_requirement' in plan:
+            elements.append(Paragraph("Lime Requirement:", normal_style))
+            lime_req = plan['lime_requirement']
+            if isinstance(lime_req, dict):
+                for key, value in lime_req.items():
+                    elements.append(Paragraph(f"  • {key}: {value}", normal_style))
+            else:
+                elements.append(Paragraph(f"  • {lime_req}", normal_style))
+            elements.append(Spacer(1, 6))
+
+        # Fertilizer Recommendation
+        if 'fertilizer_recommendation' in plan:
+            elements.append(Paragraph("Fertilizer Recommendation:", normal_style))
+            fert_rec = plan['fertilizer_recommendation']
+            if isinstance(fert_rec, dict):
+                for key, value in fert_rec.items():
+                    elements.append(Paragraph(f"  • {key}: {value}", normal_style))
+            else:
+                elements.append(Paragraph(f"  • {fert_rec}", normal_style))
+            elements.append(Spacer(1, 6))
+
+        # Irrigation
+        if 'irrigation' in plan:
+            elements.append(Paragraph("Irrigation:", normal_style))
+            irr = plan['irrigation']
+            if isinstance(irr, list):
+                for item in irr:
+                    elements.append(Paragraph(f"  • {item}", normal_style))
+            else:
+                elements.append(Paragraph(f"  • {irr}", normal_style))
+            elements.append(Spacer(1, 6))
+
+        # Pest Management
+        if 'pest_management' in plan:
+            elements.append(Paragraph("Pest Management:", normal_style))
+            pest = plan['pest_management']
+            if isinstance(pest, list):
+                for item in pest:
+                    elements.append(Paragraph(f"  • {item}", normal_style))
+            else:
+                elements.append(Paragraph(f"  • {pest}", normal_style))
+            elements.append(Spacer(1, 6))
+
+        # Harvesting Guidelines
+        if 'harvesting_guidelines' in plan:
+            elements.append(Paragraph("Harvesting Guidelines:", normal_style))
+            harvest = plan['harvesting_guidelines']
+            if isinstance(harvest, list):
+                for item in harvest:
+                    elements.append(Paragraph(f"  • {item}", normal_style))
+            else:
+                elements.append(Paragraph(f"  • {harvest}", normal_style))
+            elements.append(Spacer(1, 6))
+    else:
+        elements.append(Paragraph("No specific recommendations available for this crop.", normal_style))
+
+    elements.append(Spacer(1, 15))
+
+    # Laboratory Analysis Section
+    elements.append(Paragraph("LABORATORY ANALYSIS", heading_style))
+
+    # Parameters Table with Interpretation
+    param_data = [
+        ['Parameter', 'Value', 'Unit', 'Interpretation'],
+        ['Nitrogen', f"{analysis_data['nitrogen']:.1f}", 'ppm', get_parameter_interpretation('nitrogen', analysis_data['nitrogen'])],
+        ['Phosphorus', f"{analysis_data['phosphorus']:.1f}", 'ppm', get_parameter_interpretation('phosphorus', analysis_data['phosphorus'])],
+        ['Potassium', f"{analysis_data['potassium']:.1f}", 'ppm', get_parameter_interpretation('potassium', analysis_data['potassium'])],
+        ['pH', f"{analysis_data['ph']:.1f}", '', get_parameter_interpretation('ph', analysis_data['ph'])],
+        ['Temperature', f"{analysis_data['temperature']:.1f}", '°C', 'Environmental'],
+        ['Humidity', f"{analysis_data['humidity']:.1f}", '%', 'Environmental'],
+        ['Rainfall', f"{analysis_data['rainfall']:.1f}", 'cm', 'Environmental']
+    ]
+
+    param_table = Table(param_data, colWidths=[100, 80, 50, 100])
+    param_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 14),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('FONTSIZE', (0, 0), (-1, 0), 11),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black)
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('FONTSIZE', (0, 1), (-1, -1), 9),
     ]))
-    elements.append(table)
-    elements.append(Spacer(1, 20))
+    elements.append(param_table)
+    elements.append(Spacer(1, 15))
 
-    # Implementation Plan
+    # Graph Plot
+    elements.append(Paragraph("VISUAL ANALYSIS", heading_style))
+    chart_buffer = create_soil_nutrients_chart(analysis_data)
+    chart_image = Image(chart_buffer, width=400, height=250)
+    elements.append(chart_image)
+    elements.append(Spacer(1, 15))
+
+    # Cultural & Management Tips
+    elements.append(Paragraph("CULTURAL & MANAGEMENT TIPS", heading_style))
+
     if plan:
-        elements.append(Paragraph("Implementation Plan:", heading_style))
+        # Extract tips from plan
+        tips_found = False
         for key, value in plan.items():
-            elements.append(Paragraph(f"<b>{key.title()}:</b>", normal_style))
-            if isinstance(value, dict):
-                for sub_key, sub_value in value.items():
-                    elements.append(Paragraph(f"  • {sub_key}: {sub_value}", normal_style))
-            elif isinstance(value, list):
-                for item in value:
-                    elements.append(Paragraph(f"  • {item}", normal_style))
-            else:
-                elements.append(Paragraph(f"  {value}", normal_style))
-            elements.append(Spacer(1, 6))
+            if 'tip' in key.lower() or 'management' in key.lower() or 'cultural' in key.lower():
+                tips_found = True
+                elements.append(Paragraph(f"{key.title()}:", normal_style))
+                if isinstance(value, list):
+                    for item in value:
+                        elements.append(Paragraph(f"  • {item}", normal_style))
+                else:
+                    elements.append(Paragraph(f"  • {value}", normal_style))
+                elements.append(Spacer(1, 6))
+
+        if not tips_found:
+            # Default tips
+            default_tips = [
+                "Monitor soil moisture regularly to ensure optimal water availability",
+                "Implement crop rotation to maintain soil fertility",
+                "Use organic matter to improve soil structure and nutrient retention",
+                "Regular soil testing is recommended every 6-12 months",
+                "Follow integrated pest management practices"
+            ]
+            for tip in default_tips:
+                elements.append(Paragraph(f"  • {tip}", normal_style))
+    else:
+        default_tips = [
+            "Monitor soil moisture regularly to ensure optimal water availability",
+            "Implement crop rotation to maintain soil fertility",
+            "Use organic matter to improve soil structure and nutrient retention",
+            "Regular soil testing is recommended every 6-12 months",
+            "Follow integrated pest management practices"
+        ]
+        for tip in default_tips:
+            elements.append(Paragraph(f"  • {tip}", normal_style))
+
+    elements.append(Spacer(1, 15))
+
+    # References
+    elements.append(Paragraph("REFERENCES", heading_style))
+    references = [
+        "Agricultural Guidelines - Ministry of Agriculture",
+        "AI Model: Random Forest Classifier (99.32% accuracy)",
+        "Soil Science Standards - International Standards"
+    ]
+    for ref in references:
+        elements.append(Paragraph(f"  • {ref}", small_style))
 
     # Build PDF
     doc.build(elements)

@@ -240,6 +240,84 @@ admin:
       - organic
       - low_input
     timestamp: '2025-10-13T13:08:54.369344'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-13T13:20:48.618347'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-13T13:22:11.454014'
   created_at: '2025-10-11T02:24:58.477263'
   email: admin@agrisakha.com
   name: System Admin
