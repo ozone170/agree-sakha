@@ -12,33 +12,32 @@ A modern, AI-powered soil analysis application built with Streamlit that provide
 - **📈 Data Export**: Export analysis results to JSON and CSV formats
 - **📱 Modern UI**: Clean, responsive interface built with Streamlit
 - **🔬 Soil Parameter Analysis**: N, P, K, pH, Temperature, Humidity, Rainfall analysis
-- **☁️ Vercel Ready**: Optimized for deployment on Vercel platform
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Python 3.8+
 - pip package manager
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <your-repo-url>
    cd agree-sakha
    ```
 
 2. **Install dependencies**
+
    ```bash
    pip install -r requirements_streamlit.txt
    ```
 
 3. **Run the application**
+
    ```bash
-   # Windows
-   .\run_streamlit.bat
-   
-   # Or manually
    streamlit run streamlit_app.py
    ```
 
@@ -51,8 +50,6 @@ A modern, AI-powered soil analysis application built with Streamlit that provide
 agree-sakha/
 ├── streamlit_app.py              # Main Streamlit application
 ├── requirements_streamlit.txt    # Python dependencies
-├── run_streamlit.bat            # Windows launcher script
-├── run_streamlit.ps1            # PowerShell launcher script
 ├── README.md                    # This file
 └── backend/                     # ML model and data
     ├── crop_dataset.csv         # Training dataset
@@ -67,6 +64,7 @@ agree-sakha/
 ## 🎯 How to Use
 
 1. **Soil Analysis Page**
+
    - Enter soil parameters (N, P, K, pH, Temperature, Humidity, Rainfall)
    - Specify area size and unit
    - Click "Analyze Soil" to get crop recommendations
@@ -74,6 +72,7 @@ agree-sakha/
    - Export results to JSON or CSV
 
 2. **Crop Database Page**
+
    - Browse all available crops
    - View detailed implementation plans
    - Compare different variants (Default, High Yield, Organic, Low Input)
@@ -100,37 +99,17 @@ agree-sakha/
 ## 🌾 Supported Crops
 
 The system supports 22+ crops including:
+
 - Rice, Wheat, Maize, Cotton
 - Sugarcane, Coffee, Tea
 - Vegetables, Fruits, and more
 
 Each crop has 4 implementation variants:
+
 - **Default**: Standard farming practices
 - **High Yield**: Optimized for maximum production
 - **Organic**: Sustainable, chemical-free approach
 - **Low Input**: Cost-effective, minimal resource usage
-
-## 🚀 Deployment
-
-### Local Development
-```bash
-streamlit run streamlit_app.py
-```
-
-### Vercel Deployment (Recommended)
-1. **Push to GitHub**: Ensure your code is in a GitHub repository
-2. **Connect to Vercel**: Import your repository at [vercel.com](https://vercel.com)
-3. **Deploy**: Vercel will automatically detect and deploy your Streamlit app
-4. **Access**: Your app will be available at `https://your-project.vercel.app`
-
-For detailed deployment instructions, see [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md)
-
-### Other Deployment Options
-The application can also be deployed on:
-- Streamlit Cloud
-- Heroku
-- AWS/GCP/Azure
-- Docker containers
 
 ## 📝 License
 

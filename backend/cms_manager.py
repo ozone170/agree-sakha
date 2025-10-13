@@ -29,7 +29,6 @@ def get_default_cms_content():
             "contact": {
                 "email": "contact@agrisakha.com",
                 "phone": "+91 98765 43210",
-                "address": "2nd Floor, Innovation Hub, Bhubaneswar, Odisha, India"
             }
         },
         "last_updated": datetime.now().isoformat(),
