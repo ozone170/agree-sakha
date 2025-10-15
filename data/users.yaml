@@ -318,6 +318,437 @@ admin:
       - organic
       - low_input
     timestamp: '2025-10-13T13:22:11.454014'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-13T13:28:50.406193'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-13T13:28:54.290792'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-14T13:13:34.287840'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        summary: Mango is a popular tropical fruit. (High Yield variant)
+      selected_variant: high_yield
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-14T13:13:43.501539'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        summary: Mango is a popular tropical fruit. (High Yield variant)
+      selected_variant: high_yield
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-14T13:13:50.496793'
+  - data:
+      area: 1.0
+      area_unit: ha
+      crop_type: rice
+      date_of_collection: '2025-10-14'
+      farmer_name: niranjan
+      humidity: 60.0
+      location: adsnbvdgha
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      sample_id: adfghdf
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        - Use high-yielding varieties; monitor and increase N application slightly;
+          consider foliar micronutrients
+        summary: Mango is a popular tropical fruit. (High Yield variant)
+      selected_variant: high_yield
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-14T13:24:11.645963'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-14T13:24:15.872799'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-14T13:24:20.623513'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-15T13:10:24.374549'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 60.0
+      nitrogen: 50.0
+      ph: 7.0
+      phosphorus: 30.0
+      potassium: 40.0
+      predicted_crop: mango
+      rainfall: 100.0
+      selected_plan:
+        duration_weeks: 52
+        fertilizer:
+        - Apply 500-600 g N, 250-300 g P, 500-600 g K per tree annually
+        - Foliar sprays
+        harvesting:
+        - Harvest at maturity
+        - Post-harvest treatments
+        irrigation:
+        - Irrigate during dry spells
+        - Drip system preferred
+        land_preparation:
+        - Pitting and soil amendment
+        - Well-drained soil
+        pest_management:
+        - Control hoppers and fruit flies
+        - Sanitation pruning
+        planting:
+        - Plant grafted seedlings
+        - Spacing 8-10 m
+        summary: Mango is a popular tropical fruit.
+      selected_variant: default
+      temperature: 25.0
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-15T13:10:55.287962'
   created_at: '2025-10-11T02:24:58.477263'
   email: admin@agrisakha.com
   name: System Admin
@@ -390,8 +821,93 @@ ozone170:
       temperature: 29.0
       variants: []
     timestamp: '2025-10-11T04:42:46.704066'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 82.0
+      nitrogen: 90.0
+      ph: 6.5
+      phosphorus: 42.0
+      potassium: 43.0
+      predicted_crop: rice
+      rainfall: 202.0
+      selected_plan:
+        duration_weeks: 16
+        fertilizer:
+        - 'Apply NPK fertilizer: 50-60 kg N/ha, 30-40 kg P/ha, 30-40 kg K/ha'
+        - Split nitrogen application
+        harvesting:
+        - Harvest when grains are golden yellow and 80% mature
+        - Thresh and dry grains to 14% moisture
+        irrigation:
+        - Maintain standing water of 5-10 cm throughout the growing period
+        - Drain water 2 weeks before harvest
+        land_preparation:
+        - Plow and puddle the field to create a muddy layer
+        - Level the field for uniform water distribution
+        pest_management:
+        - Monitor for pests like stem borer and leaf folder
+        - Use integrated pest management practices
+        sowing:
+        - Sow seeds in nursery beds
+        - Transplant seedlings to main field after 3-4 weeks
+        summary: Rice is a staple cereal crop grown in flooded fields.
+      selected_variant: default
+      temperature: 20.8
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-15T13:26:59.813555'
+  - data:
+      area: 1.0
+      area_unit: ha
+      humidity: 82.0
+      nitrogen: 90.0
+      ph: 6.5
+      phosphorus: 42.0
+      potassium: 43.0
+      predicted_crop: rice
+      rainfall: 202.0
+      selected_plan:
+        duration_weeks: 16
+        fertilizer:
+        - 'Apply NPK fertilizer: 50-60 kg N/ha, 30-40 kg P/ha, 30-40 kg K/ha'
+        - Split nitrogen application
+        harvesting:
+        - Harvest when grains are golden yellow and 80% mature
+        - Thresh and dry grains to 14% moisture
+        irrigation:
+        - Maintain standing water of 5-10 cm throughout the growing period
+        - Drain water 2 weeks before harvest
+        land_preparation:
+        - Plow and puddle the field to create a muddy layer
+        - Level the field for uniform water distribution
+        pest_management:
+        - Monitor for pests like stem borer and leaf folder
+        - Use integrated pest management practices
+        sowing:
+        - Sow seeds in nursery beds
+        - Transplant seedlings to main field after 3-4 weeks
+        summary: Rice is a staple cereal crop grown in flooded fields.
+      selected_variant: default
+      temperature: 20.8
+      variants:
+      - default
+      - high_yield
+      - organic
+      - low_input
+    timestamp: '2025-10-15T13:27:08.205365'
   created_at: '2025-10-11T03:06:46.628230'
   email: adityashindhe8@gmail.com
   name: Ozone170
   password: 9796377e5805a0b7207c7244c303ac33298af3392848af6c600598fac14e91aa
   role: user
+rajat:
+  analyses: []
+  created_at: '2025-10-14T13:15:41.552407'
+  email: rajat@gmail.com
+  name: rajat
+  password: e3ed7bfc5d13c8b50de0ed8ececcbaab5560736b717ef2520d54aea5a08b2435
+  role: admin

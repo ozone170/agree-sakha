@@ -57,7 +57,7 @@ st.markdown("""
         font-size: 0.9rem;
     }
     .quick-actions {
-        background: #f8fafc;
+        background: #367CB5;
         padding: 2rem;
         border-radius: 0.5rem;
         margin-bottom: 2rem;
@@ -179,24 +179,20 @@ def main():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        if st.button("🧠 New Analysis", use_container_width=True):
-            st.session_state.navigate_to = "🔬 Soil Analysis"
-            st.rerun()
-
+        if st.button("🧠 New Analysis", key="nav_SoilAnalysis"):
+                st.switch_page("pages/6_Soil_Analysis.py")
+            
     with col2:
-        if st.button("🌾 Crop Database", use_container_width=True):
-            st.session_state.navigate_to = "🌾 Crop Database"
-            st.rerun()
+        if st.button("🌾 Crop Database", key="nav_CropDatabase"):
+            st.switch_page("pages/8_Crop_Database.py")
 
     with col3:
-        if st.button("📊 Reports", use_container_width=True):
-            st.session_state.navigate_to = "📊 Reports"
-            st.rerun()
+        if st.button("📊 Reports", key="nav_Reports"):
+            st.switch_page("pages/7_Reports.py")
 
     with col4:
-        if st.button("ℹ️ About", use_container_width=True):
-            st.session_state.navigate_to = "ℹ️ About"
-            st.rerun()
+        if st.button("ℹ️ About", key="nav_About"):
+            st.switch_page("pages/8_About.py")
 
     st.markdown('</div>', unsafe_allow_html=True)
 

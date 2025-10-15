@@ -177,6 +177,44 @@ def main():
     if 'selected_variant' not in st.session_state:
         st.session_state.selected_variant = None
 
+    # Step Indicators
+    st.markdown("### 🧭 Soil Analysis Steps")
+    steps = [
+        "1️⃣ Enter Farmer Details",
+        "2️⃣ Input Soil Parameters",
+        "3️⃣ Run AI Prediction",
+        "4️⃣ View Recommendations",
+        "5️⃣ Proceed to Report"
+    ]
+    cols = st.columns(5)
+    for i, step in enumerate(steps):
+        with cols[i]:
+            st.markdown(f"<div style='text-align: center; padding: 10px; border-radius: 10px; background-color: #326EA1;'>{step}</div>", unsafe_allow_html=True)
+
+    # Farmer Information Section (Step 1)
+    st.markdown("---")
+    st.markdown("## 1️⃣ Farmer Information")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        farmer_name = st.text_input("👨‍🌾 Farmer Name", key="farmer_name")
+        location = st.text_input("📍 Farm Location", key="location")
+    with col2:
+        sample_id = st.text_input("🧪 Sample ID (e.g. SAKHA-2025-001)", key="sample_id")
+        date_of_collection = st.date_input("📅 Date of Collection", key="date_of_collection")
+    crop_type = st.text_input("🌾 Planned Crop Type", key="crop_type")
+
+    # Validate farmer information
+    farmer_info_complete = all([farmer_name, location, crop_type])
+
+    if farmer_info_complete:
+        st.success("✅ Farmer details recorded successfully! Proceed to step 2.")
+    else:
+        st.warning("⚠️ Please complete all farmer details before continuing.")
+        return  # Stop execution if farmer info is incomplete
+
+    st.markdown("---")
+
     # Input form
     st.markdown("### 📋 Soil Parameters")
 
@@ -321,47 +359,32 @@ def main():
             else:
                 st.info("No implementation plans available for this crop.")
 
-        # Export functionality
-        st.markdown("### 📤 Export Results")
-        col1, col2, col3 = st.columns(3)
+        # Navigation buttons after analysis completion
+        st.markdown("### ✅ Analysis Completed")
+
+        col1, col2 = st.columns(2)
 
         with col1:
-            # JSON export
-            json_data = json.dumps(analysis_data, indent=2)
-            st.download_button(
-                label="📄 Download JSON",
-                data=json_data,
-                file_name=f"soil_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                mime="application/json"
-            )
+            if st.button("📄 Proceed to Reports Page", use_container_width=True, type="primary"):
+                # Store farmer info in analysis data before proceeding
+                analysis_data.update({
+                    'farmer_name': st.session_state.farmer_name,
+                    'location': st.session_state.location,
+                    'sample_id': st.session_state.sample_id,
+                    'date_of_collection': str(st.session_state.date_of_collection),
+                    'crop_type': st.session_state.crop_type,
+                    'selected_variant': st.session_state.selected_variant,
+                    'selected_plan': plan
+                })
+                st.session_state.analysis_complete = True
+                st.switch_page("pages/7_Reports.py")
 
         with col2:
-            # CSV export
-            df = pd.DataFrame([analysis_data])
-            csv = df.to_csv(index=False)
-            st.download_button(
-                label="📊 Download CSV",
-                data=csv,
-                file_name=f"soil_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-                mime="text/csv"
-            )
-
-        with col3:
-            # PDF export
-            pdf_buffer = generate_pdf_report(analysis_data, plan)
-            pdf_data = pdf_buffer.getvalue()
-            st.download_button(
-                label="📋 Download PDF",
-                data=pdf_data,
-                file_name=f"soil_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf",
-                mime="application/pdf"
-            )
-
-        # Clear analysis button
-        if st.button("🗑️ Clear Analysis", use_container_width=True):
-            st.session_state.analysis_data = None
-            st.session_state.selected_variant = None
-            st.rerun()
+            if st.button("🔁 Start New Analysis", use_container_width=True):
+                # Clear all session state
+                for key in list(st.session_state.keys()):
+                    del st.session_state[key]
+                st.rerun()
 
 if __name__ == "__main__":
     main()
